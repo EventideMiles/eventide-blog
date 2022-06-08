@@ -37,3 +37,6 @@ yarn-error.log*
 # firebase
 firebase.json
 .firebaserc
+
+# Prisma
+/prisma/migrations/
