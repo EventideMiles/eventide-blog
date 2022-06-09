@@ -2,13 +2,15 @@ import '@fortawesome/fontawesome-svg-core/styles.css'; // prevents a stupid FA b
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false; // Prevent fontawesome from dynamically adding its css since we did it manually above
 
-import Navbar from "./navbar";
-import Image from "next/image";
+import Navbar, { button } from "./navbar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faAnchor } from "@fortawesome/free-solid-svg-icons";
+import { faBook, faAnchor, faUser } from "@fortawesome/free-solid-svg-icons";
+import LoginForm from './login';
 
-const navButtons = [{ text:"Test Page", href:"/test", icon: <FontAwesomeIcon icon={faAnchor} />, isLink:true },
-                    { text:"Blog Layout", href:"/blog-layout-temp", icon:<FontAwesomeIcon icon={faBook} />, isLink:true}];
+
+  const navButtons:button[] = [{ text:"Test Page", href:"/test", icon: <FontAwesomeIcon icon={faAnchor} />, isLink:true },
+                               { text:"Blog Layout", href:"/blog-layout-temp", icon:<FontAwesomeIcon icon={faBook} />, isLink:true},
+                               { text:"Profile", href:"/profile", icon:<FontAwesomeIcon icon={faUser} />, isLink:true}];
 
 const siteName = "Eventide Blog"
 

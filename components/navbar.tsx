@@ -6,14 +6,15 @@ import Link from 'next/link';
 import { ReactElement } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faBook } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState } from 'react';
 
 // Types
-type button = {
-  href:string,
+export type button = {
+  href?:string,
   text:string,
   icon?:ReactElement,
-  isLink?:boolean
+  isLink?:boolean,
+  authForm?:ReactElement
 }
 
 const navbarClasses = "bg-indigo-800 text-white text-lg flex flex-wrap items-center justify-between";
@@ -24,15 +25,25 @@ const hideMobileButtonClasses = `hidden ${mobileButtonClasses}`;
 const siteNameClasses = "font-bold text-2xl pl-2 p-4 rounded-xl my-2 ml-0 md:ml-1";
 const siteNameStyles = {fontFamily: "'Patrick Hand', serif"}
 const buttonStyles = {fontFamily: "'Patrick Hand', serif"};
+const authClasses = "";
 
-const NavButton = (props: { href:string, text:string, icon?:ReactElement ,isLink?:boolean }) => {
+const NavButton = (props: { href?:string, text:string, icon?:ReactElement ,isLink?:boolean, authForm?:ReactElement }) => {
+  const [isAuthOpen, setAuthOpen] = useState(false);
+  if(props.authForm) {
+    return(
+      <div>
+        <div onClick={() => setAuthOpen((prev) => !prev)} ><span className="pr-2 w-7">{props.icon}</span><span className={buttonClasses} style={buttonStyles}>{props.text}</span></div>
+        <div className={isAuthOpen ? authClasses : `hidden ${authClasses}`}>{props.authForm}</div>
+      </div>
+    )
+  }
   if(props.isLink) {
     return(
-      <Link href={props.href}><a className={buttonClasses} style={buttonStyles}><span className="pr-2 w-7">{props.icon}</span><span>{props.text}</span></a></Link>
+      <Link href={props.href ? props.href : ""}><a className={buttonClasses} style={buttonStyles}><span className="pr-2 w-7">{props.icon}</span><span>{props.text}</span></a></Link>
     )
   }
   return (
-    <a className={buttonClasses} href={props.href}><span className="pr-2 w-7">{props.icon}</span><span>{props.text}</span></a>
+    <a className={buttonClasses} href={props.href ? props.href : ""}><span className="pr-2 w-7">{props.icon}</span><span>{props.text}</span></a>
   )
 }
 
@@ -43,7 +54,7 @@ const Navbar = (props: { buttons:button[], siteName?:string, siteIcon?:ReactElem
       <div className="md:hidden"></div>
       <Link href={"/"}><a className={siteNameClasses} style={siteNameStyles}><span className="p-2">{props.siteIcon}</span><span>{props.siteName || "Eventide Blog"}</span></a></Link>
       <div className="flex md:hidden" onClick={() => setIsNavOpen((prev) => !prev)}><FontAwesomeIcon icon={faBars} className="hover:bg-white hover:text-indigo-700 font-semibold px-2 hover:rounded" /></div>
-      <div className={ isNavOpen ? showMobileButtonClasses : hideMobileButtonClasses }> 
+      <div className={ isNavOpen ? mobileButtonClasses : `hidden ${mobileButtonClasses}` }> 
         {props.buttons.map((button:button) => (
           <NavButton key={`${button.href}${button.text}`} href={button.href} icon={button.icon} text={button.text} isLink={button.isLink ? true : false} />
         ))}
