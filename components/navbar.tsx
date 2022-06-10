@@ -3,7 +3,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false; // Prevent fontawesome from dynamically adding its css since we did it manually above
 
 import Link from 'next/link';
-import { ReactElement, useEffect } from 'react';
+import { ReactElement, useEffect, useLayoutEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useState } from 'react';
@@ -51,8 +51,7 @@ const Navbar = (props: { buttons:button[], siteName?:string, siteIcon?:ReactElem
   const [session, setSession]:any = useState(null);
   //const session = ;
 
-  useEffect(() => {
-    supabase.auth.session()
+  useLayoutEffect(() => {
     return setSession(supabase.auth.session())
   }, [])
   
