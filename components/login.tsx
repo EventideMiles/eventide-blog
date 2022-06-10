@@ -5,6 +5,7 @@ import { SubsectionHeader } from "./styled-react-components";
 import { toast } from "react-toastify";
 import supabase from "../utils/supabaseClient";
 import Link from "next/link";
+import Router from 'next/router';
 
 // style stuff
 const loginDivClasses = "row flex flex-center";
@@ -20,7 +21,7 @@ const LoginForm = (props: {children?:any}) => {
   const handleLogin = async (email:string) => {
     try {
       const { error } = await toast.promise(
-        supabase.auth.signIn({ email }),
+        supabase.auth.signIn({ email }, {redirectTo: "http://localhost:3000/welcome"}),
         {
           pending: "Attempting Login...",
           success: "Check your email for your magic link",
@@ -64,8 +65,7 @@ const LoginForm = (props: {children?:any}) => {
 const LogoutForm = (props:{children?:any}) => {
   const handleLogout = () => {
     supabase.auth.signOut();
-    toast.success("You've logged out, refresh or visit another page to login again")
-    
+    Router.push("/logout");
   }
 
   return(
