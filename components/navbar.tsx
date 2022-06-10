@@ -51,7 +51,7 @@ const Navbar = (props: { buttons:button[], siteName?:string, siteIcon?:ReactElem
   const [session, setSession]:any = useState(null);
   //const session = ;
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     return setSession(supabase.auth.session())
   }, [])
   
