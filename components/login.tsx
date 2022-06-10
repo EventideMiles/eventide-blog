@@ -4,10 +4,11 @@ import * as Yup from 'yup';
 import { SubsectionHeader } from "./styled-react-components";
 import { toast } from "react-toastify";
 import supabase from "../utils/supabaseClient";
+import Link from "next/link";
 
 // style stuff
 const loginDivClasses = "row flex flex-center";
-const loginButtonClasses = "bg-neutral-800 text-white hover:bg-white hover:text-neutral-800 p-4 rounded-lg items";
+const loginButtonClasses = "bg-neutral-800 text-white hover:bg-white hover:text-neutral-800 px-3 rounded-lg items"; // hover:bg-white hover:text-indigo-800 font-semibold px-3 md:hover:rounded-lg md:inline-block md:border-none border-indigo-900 border-b-[1px]
 
 // schema stuff
 const LoginSchema = Yup.object().shape({
@@ -35,7 +36,7 @@ const LoginForm = (props: {children?:any}) => {
   return(
     <div className={loginDivClasses}>
       <div className="col-6 form-widget">
-        <SubsectionHeader style={{fontFamily: "'Gentium Plus', serif"}}>Email Magic Link Sign-in:</SubsectionHeader>
+        <div className="text-white font-bold" style={{fontFamily: "'Gentium Plus', serif"}}>Email Magic Link Sign-in:</div>
         <Formik
           initialValues={{
             email:'',
@@ -48,10 +49,10 @@ const LoginForm = (props: {children?:any}) => {
           }}
         >
           {({ errors, touched }) =>(
-            <Form>
-              <Field name="email" type="email" /><br />
-              {errors.email && touched.email ? <div className="text-red-700">* {errors.email}</div> : null}
+            <Form className="pb-2">
+              <Field name="email" type="email" className="text-black h-6 mr-2" />
               <button type="submit" className={loginButtonClasses}>Submit</button>
+              {errors.email && touched.email ? <div className="text-red-400">* {errors.email}</div> : null}
             </Form>
           )}
         </Formik>
@@ -63,11 +64,12 @@ const LoginForm = (props: {children?:any}) => {
 const LogoutForm = (props:{children?:any}) => {
   const handleLogout = () => {
     supabase.auth.signOut();
+    toast.success("You've logged out, refresh or visit another page to login again")
+    
   }
 
   return(
-    <div>
-      <div>{props.children}</div>
+    <div className="pb-2">
       <button onClick={handleLogout} className={loginButtonClasses}>Logout</button>
     </div>
   )
