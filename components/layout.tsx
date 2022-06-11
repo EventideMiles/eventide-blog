@@ -15,10 +15,10 @@ const SITE_NAME = "Eventide Blog"
 // tailwind styles
 const FOOTER_CLASSES = "flex flex-1 px-0 py-8 border-t-[1px] border-slate-200 justify-center items-center";
 
-const Layout = (props: { children:any }) => {
+const Layout = (props: { children:any, extraMobileInfo?:any[] }) => {
   return(
     <div>
-      <Navbar buttons={[...NAV_BUTTONS]} siteName={SITE_NAME} siteIcon={<FontAwesomeIcon icon={faBook} />} />
+      <Navbar buttons={[...NAV_BUTTONS]} siteName={SITE_NAME} siteIcon={<FontAwesomeIcon icon={faBook} />} extraMobileInfo={props.extraMobileInfo} />
       <main>{props.children}</main>
 
       <footer className={FOOTER_CLASSES}>

@@ -46,7 +46,7 @@ const NavButton = (props: { href?:string, text:string, icon?:ReactElement ,isLin
   )
 }
 
-const Navbar = (props: { buttons:button[], siteName?:string, siteIcon?:ReactElement }) => {
+const Navbar = (props: { buttons:button[], siteName?:string, siteIcon?:ReactElement, extraMobileInfo?:any[] }) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [isLogoutOpen, setLogoutOpen] = useState(false);
@@ -75,7 +75,10 @@ const Navbar = (props: { buttons:button[], siteName?:string, siteIcon?:ReactElem
             <NavButton key={`${button.href}${button.text}`} href={button.href} icon={button.icon} text={button.text} isLink={button.isLink ? true : false} />
           ))} 
           <div className={session ? BUTTON_CLASSES : "hidden border-none"} style={BUTTON_STYLES} onClick={() => setLogoutOpen((prev) => !prev)}>Profile</div>
-          <div className={session ? `hidden` : `${BUTTON_CLASSES}`} style={BUTTON_STYLES} onClick={() => setLoginOpen((prev) => !prev)}><span className="pr-2 w-8"><FontAwesomeIcon icon={faUser} /></span><span>Login</span></div>  
+          <div className={session ? `hidden` : `${BUTTON_CLASSES}`} style={BUTTON_STYLES} onClick={() => setLoginOpen((prev) => !prev)}><span className="pr-2 w-8"><FontAwesomeIcon icon={faUser} /></span><span>Login</span></div>
+          {props.extraMobileInfo?.map((info:any, iteration=0) => (
+            <span key={`mobileExtraInfo ${iteration++}`} className="text-center justify-self-center">{info}</span>
+          ))}
         </div>
         <div className={isLogoutOpen ? `justify-self-end` : `hidden`}><LogoutForm /></div>
         <div className={isLoginOpen ? `justify-self-end` : `hidden`}><LoginForm /></div>
