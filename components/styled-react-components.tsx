@@ -1,19 +1,22 @@
-const defaultParagraphClasses = "text-justify px-4 block font-serif";
-const defaultParagraphStyles = {fontFamily: "'Gentium Plus', serif"};
-const defaultHeaderClasses = "text-3xl font-bold text-neutral-700 text-center font-serif max-w-100 mx-auto border-double border-separate border-b-2 border-neutral-300";
-const defaultHeaderStyles = {fontFamily: "'Caveat', cursive"};
-const defaultSubsectionHeaderClasses = "text-xl text-stone-700 text-center";
-const defaultSubsectionHeaderStyles = {fontFamily: "'Dancing Script', cursive"};
+// Tailwind Classes
+const DEFAULT_PARAGRAPH_CLASSES = "text-justify px-4 block font-serif";
+const DEFAULT_HEADER_CLASSES = "text-3xl font-bold text-neutral-700 text-center font-serif max-w-100 mx-auto border-double border-separate border-b-2 border-neutral-300";
+const DEFAULT_SUBSECTION_HEADER_CLASSES = "text-xl text-stone-700 text-center";
+
+// Style Objects
+const DEFAULT_PARAGRAPH_STYLES = {fontFamily: "'Gentium Plus', serif"};
+const DEFAULT_HEADER_STYLES = {fontFamily: "'Caveat', cursive"};
+const DEFAULT_SUBSECTION_HEADER_STYLES = {fontFamily: "'Dancing Script', cursive"};
 
 const Header = (props: { children:any, className?:string, style?:{} }) => {
   return(
-    <h1 className={props.className ? props.className : defaultHeaderClasses} style={props.style ? props.style : defaultHeaderStyles}>{props.children}</h1>
+    <h1 className={props.className ? props.className : DEFAULT_HEADER_CLASSES} style={props.style ? props.style : DEFAULT_HEADER_STYLES}>{props.children}</h1>
   )
 } 
 
 const SubsectionHeader = (props: { children:any, className?:string, style?:{} }) => {
   return(
-    <h2 className={props.className ? props.className : defaultSubsectionHeaderClasses} style={props.style ? props.style : defaultSubsectionHeaderStyles}>{props.children}</h2>
+    <h2 className={props.className ? props.className : DEFAULT_SUBSECTION_HEADER_CLASSES} style={props.style ? props.style : DEFAULT_SUBSECTION_HEADER_STYLES}>{props.children}</h2>
   )
 }
 
@@ -34,7 +37,7 @@ const SubsectionHeader = (props: { children:any, className?:string, style?:{} })
 
 const P = (props:{ children:any, className?:string, style?:{} }) => {
   return(
-    <p className={props.className ? props.className : defaultParagraphClasses} style={props.style ? props.style : defaultParagraphStyles}>{props.children}</p>
+    <p className={props.className ? props.className : DEFAULT_PARAGRAPH_CLASSES} style={props.style ? props.style : DEFAULT_PARAGRAPH_STYLES}>{props.children}</p>
   )
 }
 

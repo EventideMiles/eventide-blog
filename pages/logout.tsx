@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 const Welcome = () => {
   useEffect(() => {
-    toast.success("You've been logged out.");
+    toast.info("You've been logged out.");
     Router.push("/");
   })
  return(
