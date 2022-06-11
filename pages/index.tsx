@@ -1,8 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
-import { Header, SubsectionHeader, P } from '../components/styled-react-components'
 import Layout from '../components/layout';
 
 const cardClasses = "flex shrink-0 p-6 max-w-sm rounded-xl shadow-lg drop-shadow-2xl border-2 border-slate-300 transition-color mx-auto mt-1 md:mx-4 md:my-1";
