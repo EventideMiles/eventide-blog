@@ -1,9 +1,10 @@
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Layout from "../components/layout";
 import { Header, P } from "../components/styled-react-components";
+import Gravatar from 'react-gravatar'
 
-const extraMobileInfo = [<div key={1}>Author: Test Name</div>, <FontAwesomeIcon className="w-12 h-12" key={2} icon={faUser} /> ,<div key={3}>test@test.com</div>]
+const md5 = require('md5')
+
+const extraMobileInfo = [<div key={1} className="font-bold text-2xl mt-2" style={{fontFamily: "'Caveat', cursive"}}>Author</div>, <Gravatar key={2} md5={md5(`test@test.com`)} className="rounded-full inline justify-center" size={100} /> ,<div key={3}>Test Name</div>]
 
 const BlogLayout = () => {
  return(

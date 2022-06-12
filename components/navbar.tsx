@@ -9,6 +9,7 @@ import { faBars, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useState } from 'react';
 import supabase from '../utils/supabaseClient';
 import LoginForm, { LogoutForm } from './login';
+import Gravatar from 'react-gravatar';
 
 // Types
 export type button = {
@@ -24,7 +25,7 @@ const NAVBAR_LAYOUT_CLASSES = "grid grid-cols-4 items-center";
 const SITENAME_STYLE_CLASSES = "font-bold text-2xl rounded-xl";
 const SITENAME_LAYOUT_CLASSES = "pl-2 p-4 my-2 ml-0 md:ml-1 col-span-3 sm:col-span-2 justify-self-end md:justify-self-start";
 const BUTTON_STYLE_CLASSES = "hover:bg-white hover:text-indigo-800 font-semibold md:hover:rounded-lg md:border-none border-indigo-900 border-b-[1px]";
-const BUTTON_LAYOUT_CLASSES = "px-3 w-full md:w-auto md:inline-block";
+const BUTTON_LAYOUT_CLASSES = "px-3 w-full md:w-auto md:inline-block md-colspan-2";
 
 // style objects
 const SITENAME_STYLES = {fontFamily: "'Patrick Hand', serif"}
@@ -51,10 +52,16 @@ const Navbar = (props: { buttons:button[], siteName?:string, siteIcon?:ReactElem
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [isLogoutOpen, setLogoutOpen] = useState(false);
   const [session, setSession]:any = useState(null);
+  const [gravatarElement, setGravatarElement] = useState(<div></div>);
 
   useEffect(() => {
-    return setSession(supabase.auth.session())
-  }, [])
+      const tempSession = supabase.auth.session()
+      console.log(tempSession?.user?.email)
+      setSession(tempSession)
+      setGravatarElement(<Gravatar email={tempSession?.user?.email} size={25} className="rounded-full inline-block align-middle" />)
+    
+    return;
+  }, [session])
   
   return(
     <nav className={NAVBAR_CLASSES}>
@@ -65,7 +72,7 @@ const Navbar = (props: { buttons:button[], siteName?:string, siteIcon?:ReactElem
           {props.buttons.map((button:button) => (
             <NavButton key={`${button.href}${button.text}`} href={button.href} icon={button.icon} text={button.text} isLink={button.isLink ? true : false} />
           ))} 
-          <div className={session ? BUTTON_CLASSES : "hidden"} style={BUTTON_STYLES} onClick={() => setLogoutOpen((prev) => !prev)}>Profile</div>
+          <div className={session ? BUTTON_CLASSES : "hidden"} style={BUTTON_STYLES} onClick={() => setLogoutOpen((prev) => !prev)}><span className="pr-2 w-8">{gravatarElement}</span><span>Profile</span></div>
           <div className={session ? "hidden" : BUTTON_CLASSES} style={BUTTON_STYLES} onClick={() => setLoginOpen((prev) => !prev)}><span className="pr-2 w-8"><FontAwesomeIcon icon={faUser} /></span><span>Login</span></div>
         </div>
        
@@ -89,7 +96,7 @@ const Navbar = (props: { buttons:button[], siteName?:string, siteIcon?:ReactElem
 
 const cssTest = () => {
   return(
-    <div className=""></div>
+    <div className="flex flex-ro"></div>
   )
 }
 
