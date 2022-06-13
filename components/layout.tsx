@@ -4,11 +4,12 @@ config.autoAddCss = false; // Prevent fontawesome from dynamically adding its cs
 
 import Navbar, { button } from "./navbar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faAnchor } from "@fortawesome/free-solid-svg-icons";
+import { faBook, faAnchor, faPencil } from "@fortawesome/free-solid-svg-icons";
 
 
   const NAV_BUTTONS:button[] = [{ text:"Test Page", href:"/test", icon: <FontAwesomeIcon icon={faAnchor} />, isLink:true },
-                               { text:"Blog Layout", href:"/blog-layout-temp", icon:<FontAwesomeIcon icon={faBook} />, isLink:true},];
+                               { text:"Blog Layout", href:"/blog-layout-temp", icon:<FontAwesomeIcon icon={faBook} />, isLink:true },
+                               { text:"New Post", href:"/new-blog-post", icon:<FontAwesomeIcon icon={faPencil} />, isLink:true }];
 
 const SITE_NAME = "Eventide Blog"
 
