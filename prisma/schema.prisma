@@ -11,4 +11,15 @@ model users {
   id        String  @id(map: "User_pkey") @db.Uuid
   email     String  @unique(map: "User_email_key")
   firstName String?
+  posts     posts[]
+}
+
+model posts {
+  id        String   @id @db.Uuid
+  emailHash String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      users    @relation(fields: [usersId], references: [id])
+  usersId   String   @db.Uuid
+  content   String
 }

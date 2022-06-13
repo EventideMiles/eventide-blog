@@ -81,7 +81,7 @@ const Navbar = (props: { buttons:button[], siteName?:string, siteIcon?:ReactElem
         <div className={isNavOpen ? `md:hidden flex flex-col w-full` : `hidden`}>{props.buttons.map((button:button) => (
             <NavButton key={`${button.href}${button.text}`} href={button.href} icon={button.icon} text={button.text} isLink={button.isLink ? true : false} />
           ))} 
-          <div className={session ? BUTTON_CLASSES : "hidden border-none"} style={BUTTON_STYLES} onClick={() => setLogoutOpen((prev) => !prev)}>Profile</div>
+          <div className={session ? BUTTON_CLASSES : "hidden border-none"} style={BUTTON_STYLES} onClick={() => setLogoutOpen((prev) => !prev)}><span className="pr-2 w-8">{gravatarElement}</span><span>Profile</span></div>
           <div className={session ? `hidden` : `${BUTTON_CLASSES}`} style={BUTTON_STYLES} onClick={() => setLoginOpen((prev) => !prev)}><span className="pr-2 w-8"><FontAwesomeIcon icon={faUser} /></span><span>Login</span></div>
           {props.extraMobileInfo?.map((info:any, iteration=0) => (
             <span key={`mobileExtraInfo ${iteration++}`} className="text-center justify-self-center">{info}</span>
