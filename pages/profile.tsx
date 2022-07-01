@@ -1,13 +1,22 @@
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next"
 import Head from "next/head"
 import Layout from "@components/layout"
-import supabase from "@utils/supabaseClient"
+import { getUser } from "./api/user"
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  
-  const session = supabase.auth.session();
+  const user = await getUser(context.req.cookies['sb-access-token']);
+  if (!user) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      }
+    }
+  }
   return {
-    props: {session:session}, // will be passed to the page component as props
+    props: {
+
+    }
   }
 }
 
