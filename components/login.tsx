@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import supabase from "../utils/supabaseClient";
 import Router from 'next/router';
 
-const LOGIN_REDIRECT:string = "http://localhost:3000/welcome";
+const LOGIN_REDIRECT:string = "http://localhost:3000/auth/login";
 
 // tailwind style classes
 const LOGIN_FORM_CLASSES = "row flex flex-center";
@@ -63,7 +63,7 @@ const LoginForm = (props: {children?:any}) => {
 const LogoutForm = () => {
   const handleLogout = () => {
     supabase.auth.signOut();
-    Router.push("/logout");
+    Router.push("/auth/logout");
   }
 
   return(
