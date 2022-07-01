@@ -51,17 +51,16 @@ const Navbar = (props: { buttons:button[], siteName?:string, siteIcon?:ReactElem
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [isLogoutOpen, setLogoutOpen] = useState(false);
-  const [session, setSession]:any = useState(null);
+  const [user, setUser]:any = useState(null)
   const [gravatarElement, setGravatarElement] = useState(<div></div>);
 
   useEffect(() => {
-      const tempSession = supabase.auth.session()
-      console.log(tempSession?.user?.email)
-      setSession(tempSession)
-      setGravatarElement(<Gravatar email={tempSession?.user?.email} size={25} className="rounded-full inline-block align-middle" />)
-    
+    const localUserString = localStorage.getItem("localUser");
+    const user = localUserString ? JSON.parse(localUserString) : null;
+    setUser(user);
+    setGravatarElement(<Gravatar email={user?.email || "test@test.com"} size={25} className="rounded-full inline-block align-middle" />)
     return;
-  }, [session])
+  }, [user])
   
   return(
     <nav className={NAVBAR_CLASSES}>
@@ -72,8 +71,8 @@ const Navbar = (props: { buttons:button[], siteName?:string, siteIcon?:ReactElem
           {props.buttons.map((button:button) => (
             <NavButton key={`${button.href}${button.text}`} href={button.href} icon={button.icon} text={button.text} isLink={button.isLink ? true : false} />
           ))} 
-          <div className={session ? BUTTON_CLASSES : "hidden"} style={BUTTON_STYLES} onClick={() => setLogoutOpen((prev) => !prev)}><span className="pr-2 w-8">{gravatarElement}</span><span>Profile</span></div>
-          <div className={session ? "hidden" : BUTTON_CLASSES} style={BUTTON_STYLES} onClick={() => setLoginOpen((prev) => !prev)}><span className="pr-2 w-8"><FontAwesomeIcon icon={faUser} /></span><span>Login</span></div>
+          <div className={user ? BUTTON_CLASSES : "hidden"} style={BUTTON_STYLES} onClick={() => setLogoutOpen((prev) => !prev)}><span className="pr-2 w-8">{gravatarElement}</span><span>Profile</span></div>
+          <div className={user ? "hidden" : BUTTON_CLASSES} style={BUTTON_STYLES} onClick={() => setLoginOpen((prev) => !prev)}><span className="pr-2 w-8"><FontAwesomeIcon icon={faUser} /></span><span>Login</span></div>
         </div>
        
       </div>
@@ -81,8 +80,8 @@ const Navbar = (props: { buttons:button[], siteName?:string, siteIcon?:ReactElem
         <div className={isNavOpen ? `md:hidden flex flex-col w-full` : `hidden`}>{props.buttons.map((button:button) => (
             <NavButton key={`${button.href}${button.text}`} href={button.href} icon={button.icon} text={button.text} isLink={button.isLink ? true : false} />
           ))} 
-          <div className={session ? BUTTON_CLASSES : "hidden border-none"} style={BUTTON_STYLES} onClick={() => setLogoutOpen((prev) => !prev)}><span className="pr-2 w-8">{gravatarElement}</span><span>Profile</span></div>
-          <div className={session ? `hidden` : `${BUTTON_CLASSES}`} style={BUTTON_STYLES} onClick={() => setLoginOpen((prev) => !prev)}><span className="pr-2 w-8"><FontAwesomeIcon icon={faUser} /></span><span>Login</span></div>
+          <div className={user ? BUTTON_CLASSES : "hidden border-none"} style={BUTTON_STYLES} onClick={() => setLogoutOpen((prev) => !prev)}><span className="pr-2 w-8">{gravatarElement}</span><span>Profile</span></div>
+          <div className={user ? `hidden` : `${BUTTON_CLASSES}`} style={BUTTON_STYLES} onClick={() => setLoginOpen((prev) => !prev)}><span className="pr-2 w-8"><FontAwesomeIcon icon={faUser} /></span><span>Login</span></div>
           {props.extraMobileInfo?.map((info:any, iteration=0) => (
             <span key={`mobileExtraInfo ${iteration++}`} className="text-center justify-self-center">{info}</span>
           ))}
@@ -96,7 +95,7 @@ const Navbar = (props: { buttons:button[], siteName?:string, siteIcon?:ReactElem
 
 const cssTest = () => {
   return(
-    <div className="flex flex-ro"></div>
+    <div className=""></div>
   )
 }
 
