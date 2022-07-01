@@ -3,11 +3,10 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false; // Prevent fontawesome from dynamically adding its css since we did it manually above
 
 import Link from 'next/link';
-import { ReactElement, useEffect, useLayoutEffect } from 'react';
+import { ReactElement, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useState } from 'react';
-import supabase from '../utils/supabaseClient';
 import LoginForm, { LogoutForm } from './login';
 import Gravatar from 'react-gravatar';
 

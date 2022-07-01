@@ -25,11 +25,6 @@ const Login: NextPage = (props:any) => {
      * @usecase This is used to determine if a user is logged in or not for displaying certain elements.
      */
     const setUser = () => {
-      // const user = supabase.auth.user();
-      // if (!user) {
-      //   toast.error("Please login before visiting this page.");
-      //   Router.push("/");
-      // }
       if (!props.user) {
         toast.error("Please login before visiting this page.");
         Router.push("/");
