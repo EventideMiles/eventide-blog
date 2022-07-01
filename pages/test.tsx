@@ -2,7 +2,7 @@ import { faBook } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Formik } from "formik";
 import { toast } from "react-toastify";
-import Layout from "../components/layout";
+import Layout from "@components/layout";
 
 const Test = () => {
   const createToast = () => {

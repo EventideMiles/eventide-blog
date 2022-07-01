@@ -1,7 +1,7 @@
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next"
 import Head from "next/head"
-import Layout from "../components/layout"
-import supabase from "../utils/supabaseClient"
+import Layout from "@components/layout"
+import supabase from "@utils/supabaseClient"
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   

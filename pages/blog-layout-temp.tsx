@@ -1,5 +1,5 @@
-import Layout from "../components/layout";
-import { Header, P } from "../components/styled-react-components";
+import Layout from "@components/layout";
+import { Header, P } from "@components/styled-react-components";
 import Gravatar from 'react-gravatar'
 
 const md5 = require('md5')
